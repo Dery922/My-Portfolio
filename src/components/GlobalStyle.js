@@ -30,6 +30,9 @@ const GlobalStyle = createGlobalStyle`
   h3{
         color:white;
     }
+    h2{
+      font-size: 40px;
+    }
     p{
         padding:3rem 0rem;
         color: #ccc;

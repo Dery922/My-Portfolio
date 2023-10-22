@@ -5,15 +5,19 @@ import GlobalStyle from "./components/GlobalStyle";
 import Nav from "./components/Nav";
 import OurWork from "./pages/OurWork";
 import ContactUs from "./pages/ContactUs";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import MovieDetail from "./pages/MovieDetail";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
+  const location = useLocation();
+
   return (
-    <>
+    <div>
       <GlobalStyle />
       <Nav />
-      <Routes>
+
+      <Routes Location={location} key={location.pathname}>
         <Route path="/" exact element={<AboutUs />} />
 
         <Route path="/work" element={<OurWork />} />
@@ -22,7 +26,7 @@ function App() {
 
         <Route path="/work/:id" element={<MovieDetail />} />
       </Routes>
-    </>
+    </div>
   );
 }
 
