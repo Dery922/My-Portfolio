@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import clock from "../img/clock.svg";
 import diaghragm from "../img/diaphragm.svg";
 import money from "../img/money.svg";
@@ -6,10 +6,25 @@ import teamwork from "../img/teamwork.svg";
 import home2 from "../img/home2.png";
 import { About, Description, Image, Hide } from "../styles";
 import styled from "styled-components";
+import { fade } from "../animation";
 
+//TEST
+import { useInView } from "react-intersection-observer";
+import { useAnimation, useScroll } from "framer-motion";
+import { UseScroll } from "./useScroll";
 const ServicesSection = () => {
+  const controls = useAnimation();
+  const [element, view] = useInView({ threshold: 0.5 });
+
+  useEffect(() => {
+    if (view) {
+      controls.start("show");
+    } else {
+      controls.start("hidden");
+    }
+  });
   return (
-    <Services>
+    <Services variants={fade} animate={controls} initial="hidden" ref={element}>
       <div className="description">
         <h2>
           High <span>Quality</span>Services
@@ -65,6 +80,9 @@ const Services = styled(About)`
 const Cards = styled.div`
   display: flex;
   flex-wrap: wrap;
+  @media (max-width: 1300px) {
+    justify-content: center;
+  }
 `;
 
 const Card = styled.div`
